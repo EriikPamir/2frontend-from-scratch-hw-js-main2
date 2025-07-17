@@ -34,6 +34,6 @@ const filter = (array, callback) => {
     }
     
   }
-
-}
+ return result;
+};
 
