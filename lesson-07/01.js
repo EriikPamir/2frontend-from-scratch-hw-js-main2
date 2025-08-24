@@ -18,41 +18,35 @@ const WEB_TECH_IMAGES = [
   'https://production-it-incubator.s3.eu-central-1.amazonaws.com/file-manager/Image/784380b9-6937-42a6-bdfe-869835820234_html-magic-logo.jpg',
 ]
 
+const imageElement = document.getElementById('web-tech-image');
+const prevButton = document.getElementById('prev-button');
+const nextButton = document.getElementById('next-button');
+
 let currentIndex = 0;
 
-// Получаем элементы кнопок и изображения
-const imageElement = document.querySelector('.slider img');
-const prevButton = document.querySelector('.slider .prev');
-const nextButton = document.querySelector('.slider .next');
-
-// Отображаем первое изображение
-imageElement.src = WEB_TECH_IMAGES[currentIndex];
-
-// Добавляем обработчики событий
-prevButton.addEventListener('click', () => {
+function updateImage(index) {
   for (let i = 0; i < WEB_TECH_IMAGES.length; i++) {
-    if (i === currentIndex) {
-      if (i === 0) {
-        currentIndex = WEB_TECH_IMAGES.length - 1; // Переход к последнему элементу
-      } else {
-        currentIndex--; // Переход к предыдущему элементу
-      }
-      break; // Выходим из цикла
+    if (i === index) {
+      imageElement.src = WEB_TECH_IMAGES[i];
+      break;
     }
   }
-  imageElement.src = WEB_TECH_IMAGES[currentIndex]; // Меняем изображение
-});
+}
+
+updateImage(currentIndex);
 
 nextButton.addEventListener('click', () => {
-  for (let i = 0; i < WEB_TECH_IMAGES.length; i++) {
-    if (i === currentIndex) {
-      if (i === WEB_TECH_IMAGES.length - 1) {
-        currentIndex = 0; // Переход к первому элементу
-      } else {
-        currentIndex++; // Переход к следующему элементу
-      }
-      break; // Выходим из цикла
-    }
+  currentIndex++;
+  if (currentIndex >= WEB_TECH_IMAGES.length) {
+    currentIndex = 0;
   }
-  imageElement.src = WEB_TECH_IMAGES[currentIndex]; // Меняем изображение
+  updateImage(currentIndex);
+});
+
+prevButton.addEventListener('click', () => {
+  currentIndex--;
+  if (currentIndex < 0) {
+    currentIndex = WEB_TECH_IMAGES.length - 1;
+  }
+  updateImage(currentIndex);
 });
