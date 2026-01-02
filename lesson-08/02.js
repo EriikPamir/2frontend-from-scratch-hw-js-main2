@@ -4,13 +4,16 @@
  */
 
 function isNumeric(str) {
-  function isNumeric(str) {
-  if (typeof str !== "string") return false; 
-  if (str.trim() === "") return false;       
 
-  return !isNaN(str) && !isNaN(parseFloat(str));
-}
-  // your code
+  if (typeof str !== 'string') return false;
+
+
+  const trimmed = str.trim();
+
+
+  if (trimmed === '') return false;
+
+  return !isNaN(trimmed) && !isNaN(parseFloat(trimmed));
 }
 
 // console.log(isNumeric("123")) // Ожидаемый результат: true

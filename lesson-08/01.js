@@ -7,8 +7,26 @@
 */
 
 function capitalizeWords(str) {
-  return str
-  .split("  ")
-  .map(word => word.charAt(0).toUppercase() + word.slice(1))
-  .join("")
+    let result = '';
+    let makeUpper = true; // флаг: следующий символ надо сделать заглавным
+
+    for (let i = 0; i < str.length; i++) {
+        const char = str[i];
+
+        if (makeUpper && char !== ' ') {
+            // делаем заглавной текущую букву
+            result += char.toUpperCase();
+            makeUpper = false; // дальше внутри слова — обычные буквы
+        } else {
+            result += char;
+        }
+
+        // если текущий символ — пробел, то после него надо снова
+        // сделать первую букву следующего слова заглавной
+        if (char === ' ') {
+            makeUpper = true;
+        }
+    }
+
+    return result;
 }
